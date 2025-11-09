@@ -1,15 +1,12 @@
-"use server";
+"use client";
 import FilterSong from "@/ui/Search/FilterSong";
 import Search from "@/ui/Search/Search";
 import SongContainer from "@/ui/Song/SongContainer";
 import TitleFilter from "@/ui/TitleFilter";
+import { useSearchParams } from "next/navigation";
 
-export default async function Home({
-  searchParams,
-}: {
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
-}) {
-  const filter = (await searchParams).filter as string;
+export default function Home() {
+  const filter = useSearchParams().get("filter")!;
   return (
     <div className=" grid grid-cols-subgrid grid-rows-subgrid">
       {" "}

@@ -11,11 +11,11 @@ export default function FilterSong() {
       className="bg-(--color-accent) h-[60px] rounded-full col-start-6 col flex justify-between col-end-8 mt-6 ">
       <button
         onClick={() => {
-          redirect("/?filter=popular");
+          redirect("/?filter=today");
         }}
         className="w-1/1 rounded-full cursor-pointer  relative">
         <span className="z-20 relative"> Popular</span>
-        {search.get("filter") != "rate" && (
+        {search.get("filter") != "rated" && (
           <motion.div
             layoutId="ball"
             transition={{ type: "spring" }}
@@ -25,11 +25,11 @@ export default function FilterSong() {
 
       <button
         onClick={() => {
-          redirect("/?filter=rate");
+          redirect("/?filter=rated");
         }}
         className="w-1/1 cursor-pointer rounded-full relative">
         <span className="z-20 relative">Rated</span>
-        {search.get("filter") == "rate" && (
+        {search.get("filter") == "rated" && (
           <motion.div
             transition={{ type: "spring" }}
             layoutId="ball"

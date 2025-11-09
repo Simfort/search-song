@@ -5,9 +5,9 @@ export default function TitleFilter({ filter }: { filter: string }) {
   return (
     <AnimatePresence mode="wait">
       {" "}
-      {filter === "popular" ? (
+      {filter === "today" || !filter ? (
         <motion.h1
-          key={"popular"}
+          key={"today"}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -16,7 +16,7 @@ export default function TitleFilter({ filter }: { filter: string }) {
         </motion.h1>
       ) : (
         <motion.h1
-          key={"rate"}
+          key={"rated"}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
