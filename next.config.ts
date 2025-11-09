@@ -2,7 +2,13 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    domains: ["static.hitmcdn.com"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "static.hitmcdn.com",
+        pathname: "**", // разрешает все пути
+      },
+    ],
   },
 };
 
