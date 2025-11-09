@@ -1,15 +1,15 @@
 "use server";
 import FilterSong from "@/ui/Search/FilterSong";
 import Search from "@/ui/Search/Search";
-import SongContainer from "@/ui/Song/SongContainer";
-import TitleFilter from "@/ui/TitleFilter";
+
+import SongSearchContainer from "@/ui/Song/SongSearchContainer";
 
 export default async function Home({
   searchParams,
 }: {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
-  const filter = (await searchParams).filter as string;
+  const search = (await searchParams).search as string;
   return (
     <div className=" grid grid-cols-subgrid grid-rows-subgrid">
       {" "}
@@ -17,8 +17,8 @@ export default async function Home({
         <Search />
       </header>
       <FilterSong />
-      <TitleFilter filter={filter} />
-      <SongContainer filter={filter} />
+      <h1 className="col-start-1 text-center  col-end-13 mt-5 ">Songs</h1>
+      <SongSearchContainer search={search} />
     </div>
   );
 }

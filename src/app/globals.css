@@ -17,7 +17,7 @@ h1 {
 }
 
 body {
-  background: var(--background);
+  background-image: url("../../public/Frame.png");
   color: var(--foreground);
   font-size: 20px;
   overflow-x: hidden;

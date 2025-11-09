@@ -1,9 +1,10 @@
+"use client";
 import Image from "next/image";
 import loop from "../../../public/interface-edit-pin-3--pin-push-thumbtack.svg";
 
 export default function Search() {
   return (
-    <form action="">
+    <form action="/search">
       <label
         htmlFor="song"
         className=" flex items-center justify-end  relative   ">
@@ -12,7 +13,7 @@ export default function Search() {
           type="text"
           className="bg-[#00000044] outline-0 px-[50px] rounded-full py-3.5"
           placeholder="Search Song"
-          name="song"
+          name="search"
         />
         <Image
           src={loop}
