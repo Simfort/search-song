@@ -1,7 +1,7 @@
 "use server";
 
 import { SongParser } from "@/lib/songParser";
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest } from "next/server";
 import { unstable_cache } from "next/cache";
 const cachedGetTopMusics = unstable_cache(
   async (filter) => {
@@ -16,8 +16,16 @@ export async function GET(req: NextRequest) {
     const filter = req.nextUrl.searchParams.get("filter");
     const topMusics = await cachedGetTopMusics(filter ? filter : "today");
 
-    return NextResponse.json(topMusics);
+    return new Response(JSON.stringify(topMusics), {
+      status: 200,
+      headers: {
+        "Access-Control-Allow-Methods": "GET, POST",
+        "Access-Control-Allow-Origin": "*",
+      },
+    });
   } catch (e) {
-    console.log(e);
+    return new Response(JSON.stringify(e), {
+      status: 501,
+    });
   }
 }
