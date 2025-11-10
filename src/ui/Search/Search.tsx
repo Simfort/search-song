@@ -6,7 +6,7 @@ export default function Search() {
   return (
     <form action="/search">
       <label
-        htmlFor="song"
+        htmlFor="search"
         className=" flex items-center justify-end  relative   ">
         {" "}
         <input

@@ -5,47 +5,33 @@ export class SongParser {
   static #getSongs(data: string) {
     const window = new JSDOM(data).window;
     const document = window.document;
-    const songs = document.querySelectorAll(".tracks__item");
+    const songs = document.querySelectorAll(".tmtMus_blc");
     const dataSongs: Song[] = [];
     songs.forEach((val) => {
       const song = {} as Song;
-      const title = val.querySelector(".track__title");
-      const author = val.querySelector(".track__desc");
-      const href = val.querySelector("a[data-nopjax]") as HTMLAnchorElement;
-      const time = val.querySelector(".track__fulltime");
-      const bgUrl = window
-        .getComputedStyle(val.querySelector(".track__img")!)
-        .backgroundImage.slice(5, -2);
+      const title = val.querySelector(".tmtMus_blc_tracklink");
+      const author = val.querySelector(".tmtMus_blc_artist");
+      const href = val.querySelector(".tmtMus_blc_download.link");
+      const time = val.querySelector(".tmtMus_blc_time");
 
-      song.image = bgUrl;
       song.title = title!.textContent.trim();
       song.author = author!.textContent;
-      song.href = href.href;
+      song.href = href!.getAttribute("href")!;
       song.time = time!.textContent;
       dataSongs.push(song);
     });
     return dataSongs;
   }
   static async getTopMusics(type: "rated" | "today", page?: number) {
-    const res = !page
-      ? await fetch(`https://eu.hitmo-top.com/songs/top-${type}`, {
-          headers: {
-            "User-Agent": "Mozilla/5.0 (compatible)",
-          },
-        })
-      : await fetch(
-          `https://eu.hitmo-top.com/songs/top-${type}/start/${(page - 1) * 48}`
-        );
+    const res = await fetch(`https://muzbomb.net/`);
+
     const data = await res.text();
 
     return SongParser.#getSongs(data);
   }
-  static async getMusic(music: string, page?: number) {
-    const res = !page
-      ? await fetch(`https://eu.hitmo-top.com/search?q=${music}`)
-      : await fetch(
-          `https://eu.hitmo-top.com/search/start/${(page - 1) * 48}?q=${music}`
-        );
+  static async getMusic(music: string) {
+    const res = await fetch(`https://muzbomb.net/?song=${music}`);
+
     const data = await res.text();
 
     return SongParser.#getSongs(data);
