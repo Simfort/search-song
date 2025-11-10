@@ -21,4 +21,5 @@ body {
   color: var(--foreground);
   font-size: 20px;
   overflow-x: hidden;
+  background-attachment: fixed;
 }
