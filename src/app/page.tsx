@@ -4,6 +4,7 @@ import Search from "@/ui/Search/Search";
 import SongContainer from "@/ui/Song/SongContainer";
 import TitleFilter from "@/ui/TitleFilter";
 import { useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 
 export default function Home() {
   const filter = useSearchParams().get("filter")!;
@@ -15,7 +16,9 @@ export default function Home() {
       </header>
       <FilterSong />
       <TitleFilter filter={filter} />
-      <SongContainer filter={filter} />
+      <Suspense fallback={<TitleFilter filter={filter} />}>
+        <SongContainer filter={filter} />
+      </Suspense>
     </div>
   );
 }

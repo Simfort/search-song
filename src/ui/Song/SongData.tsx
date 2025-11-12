@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import SongItem from "./SongItem";
 import { Song } from "@/lib/types";
 
-export function SongData({ filter, page }: { filter: string; page?: number }) {
+export function SongData({ filter }: { filter: string }) {
   const [songs, setSongs] = useState<Song[]>([]);
   useEffect(() => {
     fetch(`/api?filter=${filter}`)

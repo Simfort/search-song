@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { SongData } from "./SongData";
 
 export default function SongContainer({ filter }: { filter: string }) {
